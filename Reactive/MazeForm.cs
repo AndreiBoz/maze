@@ -19,37 +19,37 @@ using System.Windows.Forms;
 
 namespace Reactive
 {
-    public partial class PlanetForm : Form
+    public partial class MazeForm : Form
     {
-        private PlanetAgent _ownerAgent;
+        private MazeAgent _ownerAgent;
         private Bitmap _doubleBufferImage;
 
-        public PlanetForm()
+        public MazeForm()
         {
             InitializeComponent();
         }
 
-        public void SetOwner(PlanetAgent a)
+        public void SetOwner(MazeAgent a)
         {
             _ownerAgent = a;
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
-            DrawPlanet();
+            DrawMaze();
         }
 
-        public void UpdatePlanetGUI()
+        public void UpdateMazeGUI()
         {
-            DrawPlanet();
+            DrawMaze();
         }
 
         private void pictureBox_Resize(object sender, EventArgs e)
         {
-            DrawPlanet();
+            DrawMaze();
         }
 
-        private void DrawPlanet()
+        private void DrawMaze()
         {
             int w = pictureBox.Width;
             int h = pictureBox.Height;

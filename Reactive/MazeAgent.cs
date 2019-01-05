@@ -20,15 +20,15 @@ using System.Windows.Forms;
 
 namespace Reactive
 {
-    public class PlanetAgent : ActressMas.Agent
+    public class MazeAgent : ActressMas.Agent
     {
-        private PlanetForm _formGui;
+        private MazeForm _formGui;
         public Dictionary<string, string> ExplorerPositions { get; set; }
         public Dictionary<string, string> ResourcePositions { get; set; }
         public Dictionary<string, string> Loads { get; set; }
         private string _basePosition;
 
-        public PlanetAgent()
+        public MazeAgent()
         {
             ExplorerPositions = new Dictionary<string, string>();
             ResourcePositions = new Dictionary<string, string>();
@@ -41,7 +41,7 @@ namespace Reactive
 
         private void GUIThread()
         {
-            _formGui = new PlanetForm();
+            _formGui = new MazeForm();
             _formGui.SetOwner(this);
             _formGui.ShowDialog();
             Application.Run();
@@ -104,7 +104,7 @@ namespace Reactive
                         break;
                 }
 
-                _formGui.UpdatePlanetGUI();
+                _formGui.UpdateMazeGUI();
             }
             catch (Exception ex)
             {

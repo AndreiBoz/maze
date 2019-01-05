@@ -23,9 +23,9 @@ namespace Reactive
         {
             var env = new ActressMas.Environment();
 
-            var planetAgent = new PlanetAgent();
-            env.Add(planetAgent, "planet");
-            planetAgent.Start();
+            var mazeAgent = new MazeAgent();
+            env.Add(mazeAgent, "maze");
+            mazeAgent.Start();
 
             Thread.Sleep(100);
 

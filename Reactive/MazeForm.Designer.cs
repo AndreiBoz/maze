@@ -1,6 +1,6 @@
 ﻿namespace Reactive
 {
-    partial class PlanetForm
+    partial class MazeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -43,14 +43,14 @@
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
             this.pictureBox.Resize += new System.EventHandler(this.pictureBox_Resize);
             // 
-            // PlanetForm
+            // MazeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 591);
             this.Controls.Add(this.pictureBox);
-            this.Name = "PlanetForm";
-            this.Text = "Planet";
+            this.Name = "MazeForm";
+            this.Text = "Maze";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 

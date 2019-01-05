@@ -42,7 +42,7 @@ namespace Reactive
                 _y = Utils.RandNoGen.Next(Utils.Size);
             }
 
-            Send("planet", Utils.Str("position", _x, _y));
+            Send("maze", Utils.Str("position", _x, _y));
         }
 
         private bool IsAtBase()
@@ -64,32 +64,32 @@ namespace Reactive
                 {
                     // R1. If you detect an obstacle, then change direction
                     MoveRandomly();
-                    Send("planet", Utils.Str("change", _x, _y));
+                    Send("maze", Utils.Str("change", _x, _y));
                 }
                 else if (action == "move" && _state == State.Carrying && IsAtBase())
                 {
                     // R2. If carrying samples and at the base, then unload samples
                     _state = State.Free;
-                    Send("planet", Utils.Str("unload", _resourceCarried));
+                    Send("maze", Utils.Str("unload", _resourceCarried));
                 }
                 else if (action == "move" && _state == State.Carrying && !IsAtBase())
                 {
                     // R3. If carrying samples and not at the base, then travel up gradient
                     MoveToBase();
-                    Send("planet", Utils.Str("carry", _x, _y));
+                    Send("maze", Utils.Str("carry", _x, _y));
                 }
                 else if (action == "rock")
                 {
                     // R4. If you detect a sample, then pick sample up
                     _state = State.Carrying;
                     _resourceCarried = parameters[0];
-                    Send("planet", Utils.Str("pick-up", _resourceCarried));
+                    Send("maze", Utils.Str("pick-up", _resourceCarried));
                 }
                 else if (action == "move")
                 {
                     // R5. If (true), then move randomly
                     MoveRandomly();
-                    Send("planet", Utils.Str("change", _x, _y));
+                    Send("maze", Utils.Str("change", _x, _y));
                 }
             }
             catch (Exception ex)
