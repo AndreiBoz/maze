@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{A11DA86F-523C-4D96-81FC-77875FB3F24D}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Reactive/Utils.cs">
+    <Files>
+      <File FileName="Reactive/Utils.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Reactive PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

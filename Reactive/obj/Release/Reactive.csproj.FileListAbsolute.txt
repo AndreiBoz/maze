@@ -47,3 +47,13 @@ D:\CloudStation\Did\Masma\FL\ActressMasExamples\L01 Reactive Architecture\bin\Re
 D:\CloudStation\Did\Masma\FL\ActressMasExamples\L01 Reactive Architecture\obj\Release\Reactive.csprojResolveAssemblyReference.cache
 D:\CloudStation\Did\Masma\FL\ActressMasExamples\L01 Reactive Architecture\obj\Release\Reactive.PlanetForm.resources
 D:\CloudStation\Did\Masma\FL\ActressMasExamples\L01 Reactive Architecture\obj\Release\Reactive.csproj.GenerateResource.Cache
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\bin\Release\Reactive.exe.config
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\bin\Release\Reactive.exe
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\bin\Release\Reactive.pdb
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\bin\Release\ActressMas.dll
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\Release\Reactive.MazeForm.resources
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\Release\Reactive.csproj.GenerateResource.cache
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\Release\Reactive.csproj.CoreCompileInputs.cache
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\Release\Reactive.csproj.CopyComplete
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\Release\Reactive.exe
+C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\Release\Reactive.pdb
