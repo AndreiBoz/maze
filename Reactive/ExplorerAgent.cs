@@ -32,14 +32,14 @@ namespace Reactive
         {
             Console.WriteLine("Starting " + Name);
 
-            _x = Utils.Size / 2;
-            _y = Utils.Size / 2;
+            _x = Utils.Columns / 2;
+            _y = Utils.Lines / 2;
             _state = State.Free;
 
             while (IsAtBase())
             {
-                _x = Utils.RandNoGen.Next(Utils.Size);
-                _y = Utils.RandNoGen.Next(Utils.Size);
+                _x = Utils.RandNoGen.Next(Utils.Columns);
+                _y = Utils.RandNoGen.Next(Utils.Lines);
             }
 
             Send("maze", Utils.Str("position", _x, _y));
@@ -47,7 +47,7 @@ namespace Reactive
 
         private bool IsAtBase()
         {
-            return (_x == Utils.Size / 2 && _y == Utils.Size / 2); // the position of the base
+            return (_x == Utils.Columns / 2 && _y == Utils.Lines / 2); // the position of the base
         }
 
         public override void Act(Message message)
@@ -60,7 +60,14 @@ namespace Reactive
                 List<string> parameters;
                 Utils.ParseMessage(message.Content, out action, out parameters);
 
-                if (action == "block")
+                // Custom example for Alex 
+              
+                if (action == "pass" || action == "wall" || action == "exit")
+                {
+                    // R0. If you can pass then continue in same direction
+                    MoveRandomly();
+                    Send("maze", Utils.Str("up", _x, _y));
+                }else if (action == "block")
                 {
                     // R1. If you detect an obstacle, then change direction
                     MoveRandomly();
@@ -104,9 +111,9 @@ namespace Reactive
             switch (d)
             {
                 case 0: if (_x > 0) _x--; break;
-                case 1: if (_x < Utils.Size - 1) _x++; break;
+                case 1: if (_x < Utils.Columns - 1) _x++; break;
                 case 2: if (_y > 0) _y--; break;
-                case 3: if (_y < Utils.Size - 1) _y++; break;
+                case 3: if (_y < Utils.Lines - 1) _y++; break;
             }
 
             Thread.Sleep(Utils.Delay);
@@ -114,8 +121,8 @@ namespace Reactive
 
         private void MoveToBase()
         {
-            int dx = _x - Utils.Size / 2;
-            int dy = _y - Utils.Size / 2;
+            int dx = _x - Utils.Columns / 2;
+            int dy = _y - Utils.Lines / 2;
 
             if (Math.Abs(dx) > Math.Abs(dy))
                 _x -= Math.Sign(dx);

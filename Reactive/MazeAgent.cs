@@ -24,19 +24,14 @@ namespace Reactive
     {
         private MazeForm _formGui;
         public Dictionary<string, string> ExplorerPositions { get; set; }
-        public Dictionary<string, string> ResourcePositions { get; set; }
-        public Dictionary<string, string> Loads { get; set; }
-        private string _basePosition;
-
+       
         public MazeAgent()
         {
             ExplorerPositions = new Dictionary<string, string>();
-            ResourcePositions = new Dictionary<string, string>();
-            Loads = new Dictionary<string, string>();
-            _basePosition = Utils.Str(Utils.Size / 2, Utils.Size / 2);
 
             Thread t = new Thread(new ThreadStart(GUIThread));
             t.Start();
+        
         }
 
         private void GUIThread()
@@ -50,23 +45,6 @@ namespace Reactive
         public override void Setup()
         {
             Console.WriteLine("Starting " + Name);
-
-            List<string> resPos = new List<string>();
-            string compPos = Utils.Str(Utils.Size / 2, Utils.Size / 2);
-            resPos.Add(compPos); // the position of the base
-
-            for (int i = 1; i <= Utils.NoResources; i++)
-            {
-                while (resPos.Contains(compPos)) // resources do not overlap
-                {
-                    int x = Utils.RandNoGen.Next(Utils.Size);
-                    int y = Utils.RandNoGen.Next(Utils.Size);
-                    compPos = Utils.Str(x, y);
-                }
-
-                ResourcePositions.Add("res" + i, compPos);
-                resPos.Add(compPos);
-            }
         }
 
         public override void Act(ActressMas.Message message)
@@ -78,31 +56,8 @@ namespace Reactive
                 string action; string parameters;
                 Utils.ParseMessage(message.Content, out action, out parameters);
 
-                switch (action)
-                {
-                    case "position":
-                        HandlePosition(message.Sender, parameters);
-                        break;
-
-                    case "change":
-                        HandleChange(message.Sender, parameters);
-                        break;
-
-                    case "pick-up":
-                        HandlePickUp(message.Sender, parameters);
-                        break;
-
-                    case "carry":
-                        HandleCarry(message.Sender, parameters);
-                        break;
-
-                    case "unload":
-                        HandleUnload(message.Sender);
-                        break;
-
-                    default:
-                        break;
-                }
+               
+                HandleDirection(message.Sender, parameters, action);
 
                 _formGui.UpdateMazeGUI();
             }
@@ -112,57 +67,55 @@ namespace Reactive
             }
         }
 
-        private void HandlePosition(string sender, string position)
-        {
-            ExplorerPositions.Add(sender, position);
-            Send(sender, "move");
-        }
-
-        private void HandleChange(string sender, string position)
+        private void HandleDirection(string sender, string position, string action)
         {
             ExplorerPositions[sender] = position;
-
-            foreach (string k in ExplorerPositions.Keys)
+            // Check for exit
+            if (ExitFound(position, action))
             {
-                if (k == sender)
-                    continue;
-                if (ExplorerPositions[k] == position)
-                {
-                    Send(sender, "block");
-                    return;
-                }
+                Send(sender, "exit");
             }
-
-            foreach (string k in ResourcePositions.Keys)
+            
+            // Check walls
+            if (WallFound(position,action))
             {
-                if (position != _basePosition && ResourcePositions[k] == position)
-                {
-                    Send(sender, "rock " + k);
-                    return;
-                }
+                Send(sender, "wall");
             }
-
-            Send(sender, "move");
+            // Pass
+            Send(sender, "pass");
         }
 
-        private void HandlePickUp(string sender, string position)
+        private bool WallFound(string position, string direction)
         {
-            Loads[sender] = position;
-            Send(sender, "move");
+            string[] pos = position.Split();
+
+            int x = Convert.ToInt32(pos[1]);
+            int y = Convert.ToInt32(pos[0]);
+            
+            switch(direction)
+            {
+                case "up":
+                    return Utils.Maze[x, y].up;
+                case "down":
+                    return Utils.Maze[x, y].down;
+                case "left":
+                    return Utils.Maze[x, y].left;
+                case "right":
+                    return Utils.Maze[x, y].right;
+                default:
+                    return false;
+            }
         }
 
-        private void HandleCarry(string sender, string position)
+        private bool ExitFound(string position, string direction)
         {
-            ExplorerPositions[sender] = position;
-            string res = Loads[sender];
-            ResourcePositions[res] = position;
-            Send(sender, "move");
+            string[] pos = position.Split();
+
+            int x = Convert.ToInt32(pos[0]);
+            int y = Convert.ToInt32(pos[1]);
+
+            return x == Utils.XExit && y == Utils.YExit && direction == Utils.ExitDirection;  
         }
 
-        private void HandleUnload(string sender)
-        {
-            Loads.Remove(sender);
-            Send(sender, "move");
-        }
     }
 }

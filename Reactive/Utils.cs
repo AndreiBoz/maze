@@ -20,13 +20,28 @@ namespace Reactive
 {
     public class Utils
     {
-        public static int Size = 11;
-        public static int NoExplorers = 5;
-        public static int NoResources = 10;
+        public static int Lines { get; private set; }
+        public static int Columns { get; private set; }
+        public static Directions[,] Maze { get; private set; }
+        public static int NoExplorers = 1;
+        public static int NoResources = 0;
+        // Maze exit
+        public static int XExit { get; private set; }
+        public static int YExit { get; private set; }
+        public static string  ExitDirection { get; private set; }
 
         public static int Delay = 200;
         public static Random RandNoGen = new Random();
 
+        public Utils(int lines, int colums, Directions[,]maze, int xE, int yE, string dE)
+        {
+            Lines = lines;
+            Columns = colums;
+            Maze = maze;
+            XExit = xE;
+            YExit = yE;
+            ExitDirection = dE;
+        }
         public static void ParseMessage(string content, out string action, out List<string> parameters)
         {
             string[] t = content.Split();
@@ -63,5 +78,7 @@ namespace Reactive
         {
             return string.Format("{0} {1} {2}", p1, p2, p3);
         }
+        
     }
+  
 }
