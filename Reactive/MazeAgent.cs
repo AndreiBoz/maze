@@ -24,14 +24,14 @@ namespace Reactive
     {
         private MazeForm _formGui;
         public Dictionary<string, string> ExplorerPositions { get; set; }
-       
+
         public MazeAgent()
         {
             ExplorerPositions = new Dictionary<string, string>();
 
             Thread t = new Thread(new ThreadStart(GUIThread));
             t.Start();
-        
+
         }
 
         private void GUIThread()
@@ -56,9 +56,8 @@ namespace Reactive
                 string action; string parameters;
                 Utils.ParseMessage(message.Content, out action, out parameters);
 
-               
-                HandleDirection(message.Sender, parameters, action);
 
+                HandleDirection(message.Sender, parameters, action);
                 _formGui.UpdateMazeGUI();
             }
             catch (Exception ex)
@@ -75,9 +74,9 @@ namespace Reactive
             {
                 Send(sender, "exit");
             }
-            
+
             // Check walls
-            if (WallFound(position,action))
+            if (WallFound(position, action))
             {
                 Send(sender, "wall");
             }
@@ -91,8 +90,8 @@ namespace Reactive
 
             int x = Convert.ToInt32(pos[1]);
             int y = Convert.ToInt32(pos[0]);
-            
-            switch(direction)
+
+            switch (direction)
             {
                 case "up":
                     return Utils.Maze[x, y].up;
@@ -114,7 +113,7 @@ namespace Reactive
             int x = Convert.ToInt32(pos[0]);
             int y = Convert.ToInt32(pos[1]);
 
-            return x == Utils.XExit && y == Utils.YExit && direction == Utils.ExitDirection;  
+            return x == Utils.XExit && y == Utils.YExit && direction == Utils.ExitDirection;
         }
 
     }

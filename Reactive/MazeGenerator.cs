@@ -16,6 +16,22 @@ namespace Reactive
             this.left = left;
             this.right = right;
         }
+    }
+
+    public struct ExplorerDirections
+    {
+        public double up;
+        public double down;
+        public double left;
+        public double right;
+
+        public ExplorerDirections(double up, double down, double left, double right)
+        {
+            this.up = up;
+            this.down = down;
+            this.left = left;
+            this.right = right;
+        }
 
     }
 
@@ -23,7 +39,7 @@ namespace Reactive
     {
         private Random _gen;
         private Utils _utils;
-        
+
         public int Lines { get; } = 21;
         public int Columns { get; } = 23;
 
@@ -32,14 +48,14 @@ namespace Reactive
         public string DirectionExit { get; private set; }
 
         public Directions[,] Maze { get; private set; }
-
+        public ExplorerDirections[,] ExplorerMaze { get; private set; }
         public MazeGenerator()
         {
             _gen = new Random();
 
             Init(Lines, Columns);
         }
-        
+
         private void Init(int lines, int columns)
         {
             XExit = GenerateRand(lines);
@@ -48,7 +64,26 @@ namespace Reactive
             DirectionExit = GenerateRandDirection();
 
             Maze = GenerateMaze(Lines, Columns);
-            _utils = new Utils(Lines, Columns, Maze,XExit,YExit,DirectionExit);
+            ExplorerMaze = SetExplorerMaze(Maze, Lines, Columns);
+            _utils = new Utils(Lines, Columns, Maze, ExplorerMaze, XExit, YExit, DirectionExit);
+        }
+
+        private ExplorerDirections[,] SetExplorerMaze(Directions[,] maze, int lines, int columns)
+        {
+            ExplorerDirections[,] explorerMaze = new ExplorerDirections[lines, columns];
+
+            for (int i = 0; i < lines; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    explorerMaze[i, j].up = maze[i, j].up ? 0.0 : 1.0;
+                    explorerMaze[i, j].down = maze[i, j].down ? 0.0 : 1.0;
+                    explorerMaze[i, j].left = maze[i, j].left ? 0.0 : 1.0;
+                    explorerMaze[i, j].right = maze[i, j].right ? 0.0 : 1.0;
+                }
+            }
+
+            return explorerMaze;
         }
 
         private Directions[,] GenerateMaze(int lines, int columns)
@@ -128,13 +163,13 @@ namespace Reactive
             h = orientation ? y + height - wy - 1 : height;
 
             GenerateDivision(subdivision, nx, ny, w, h, GetOrientation(w, h));
- 
+
             return subdivision;
         }
 
         /**
          * Genrate random maze (secondary option)
-         **/ 
+         **/
         public Directions[,] GenerateRandomMaze()
         {
             Directions[,] chamber = new Directions[Lines, Columns];
@@ -153,7 +188,7 @@ namespace Reactive
          * Attach borders to a maze
          * 
          * Add wall margins
-        **/ 
+        **/
         public Directions[,] AttachBorders(Directions[,] maze)
         {
             for (int i = 0; i < Lines; i++)
@@ -191,8 +226,8 @@ namespace Reactive
 
         /*
          *  This method check if a cell neighbours(up,down,left,right) do not exceed boundary limits
-        **/ 
-        public bool HasNeighbour(int x, int y,string direction)
+        **/
+        public bool HasNeighbour(int x, int y, string direction)
         {
             switch (direction)
             {
@@ -215,7 +250,7 @@ namespace Reactive
 
         /*
          *  Add "wall" to cell neighbour depending by selected direction
-         **/ 
+         **/
         public Directions[,] AddWallToNeighbour(int x, int y, Directions[,] maze, string direction)
         {
             switch (direction)
@@ -293,10 +328,10 @@ namespace Reactive
          * Add random exit to the maze 
          **/
         public Directions[,] CreateExit(Directions[,] maze, bool genX, bool genY)
-        {     
+        {
             if (genX) XExit = GenerateRand(Lines);
             if (genY) YExit = GenerateRand(Columns);
-            
+
             switch (DirectionExit)
             {
                 case "up":
