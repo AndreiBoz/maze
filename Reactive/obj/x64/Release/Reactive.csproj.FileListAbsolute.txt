@@ -8,3 +8,14 @@ C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\x64\Release\Reactive.csproj.
 C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\x64\Release\Reactive.csproj.CopyComplete
 C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\x64\Release\Reactive.exe
 C:\Users\Andrei\Desktop\Final\Reactive\Reactive\obj\x64\Release\Reactive.pdb
+C:\Users\Andrei\Desktop\git\maze\Reactive\bin\x64\Release\Reactive.exe.config
+C:\Users\Andrei\Desktop\git\maze\Reactive\bin\x64\Release\Reactive.exe
+C:\Users\Andrei\Desktop\git\maze\Reactive\bin\x64\Release\Reactive.pdb
+C:\Users\Andrei\Desktop\git\maze\Reactive\bin\x64\Release\ActressMas.dll
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.csprojAssemblyReference.cache
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.MazeForm.resources
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.csproj.GenerateResource.cache
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.csproj.CoreCompileInputs.cache
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.csproj.CopyComplete
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.exe
+C:\Users\Andrei\Desktop\git\maze\Reactive\obj\x64\Release\Reactive.pdb
